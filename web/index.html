@@ -569,6 +569,74 @@
       color: var(--dim);
     }
 
+    /* ===== Walking cat ===== */
+    .gyunta-walk-track {
+      position: absolute;
+      bottom: 68px;
+      left: 0; right: 0;
+      height: 92px;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .gyunta-walker {
+      position: absolute;
+      bottom: 0; left: 0;
+      will-change: transform;
+      animation: gyunta-march 18s linear infinite;
+    }
+    @keyframes gyunta-march {
+      from { transform: translateX(-180px); }
+      to   { transform: translateX(calc(100vw + 180px)); }
+    }
+    .gyunta-cat {
+      width: 108px;
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 3px 12px rgba(29,158,117,0.22));
+      animation: gyunta-bob 0.24s ease-in-out infinite alternate;
+    }
+    @keyframes gyunta-bob {
+      from { transform: translateY(0px); }
+      to   { transform: translateY(-3px); }
+    }
+    /* 対角歩行: 前右+後左 = leg-a, 前左+後右 = leg-b */
+    .gyunta-leg-a {
+      transform-box: fill-box;
+      transform-origin: 50% 0%;
+      animation: gyunta-swing-a 0.48s ease-in-out infinite;
+    }
+    .gyunta-leg-b {
+      transform-box: fill-box;
+      transform-origin: 50% 0%;
+      animation: gyunta-swing-b 0.48s ease-in-out infinite;
+    }
+    @keyframes gyunta-swing-a {
+      0%   { transform: rotate(-18deg); }
+      50%  { transform: rotate(18deg); }
+      100% { transform: rotate(-18deg); }
+    }
+    @keyframes gyunta-swing-b {
+      0%   { transform: rotate(18deg); }
+      50%  { transform: rotate(-18deg); }
+      100% { transform: rotate(18deg); }
+    }
+    .gyunta-tail {
+      transform-box: fill-box;
+      transform-origin: 100% 100%;
+      animation: gyunta-tail-sway 1.6s ease-in-out infinite alternate;
+    }
+    @keyframes gyunta-tail-sway {
+      from { transform: rotate(-6deg); }
+      to   { transform: rotate(6deg); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .gyunta-walker,
+      .gyunta-cat,
+      .gyunta-leg-a,
+      .gyunta-leg-b,
+      .gyunta-tail { animation: none; }
+    }
+
     /* ===== Focus ring ===== */
     :focus-visible {
       outline: 2px solid var(--mint);
@@ -612,6 +680,97 @@
     </svg>
     出店情報を見る
   </a>
+
+  <!-- ぎゅん太 トコトコ歩行アニメーション -->
+  <div class="gyunta-walk-track" aria-hidden="true">
+    <div class="gyunta-walker">
+      <!--
+        viewBox: 0 0 145 87
+        猫は右向き（左→右へ歩く）
+        描画順: しっぽ → 後足 → 胴体 → 前足 → 首 → 頭 → 顔
+        対角歩行: 前右(near)+後左(far) = leg-b, 前左(far)+後右(near) = leg-a
+        transform-box:fill-box + transform-origin:50% 0% で股関節ピボット
+      -->
+      <svg class="gyunta-cat" viewBox="0 0 145 87" xmlns="http://www.w3.org/2000/svg">
+
+        <!-- しっぽ（胴体左側から上へカーブ、グループで基点回転） -->
+        <g class="gyunta-tail">
+          <path d="M28 56 Q10 42 11 26 Q12 14 22 17"
+                stroke="#7a8098" stroke-width="6" stroke-linecap="round" fill="none"/>
+          <path d="M19 17 Q22 13 25 17"
+                stroke="#9daabe" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+        </g>
+
+        <!-- 後足 far（胴体より後ろに描画＝濃い色） leg-b -->
+        <g class="gyunta-leg-b">
+          <rect x="36" y="62" width="7" height="15" rx="3.5" fill="#6a7088"/>
+          <ellipse cx="39.5" cy="78" rx="5.5" ry="3" fill="#6a7088"/>
+        </g>
+        <!-- 後足 near（手前、やや明） leg-a -->
+        <g class="gyunta-leg-a">
+          <rect x="45" y="62" width="7" height="15" rx="3.5" fill="#7a8098"/>
+          <ellipse cx="48.5" cy="78" rx="5.5" ry="3" fill="#7a8098"/>
+        </g>
+
+        <!-- 胴体 -->
+        <ellipse cx="57" cy="53" rx="30" ry="16" fill="#8a90a8"/>
+        <!-- タビー縞 -->
+        <ellipse cx="44" cy="49" rx="4"   ry="13" fill="#6a7088" opacity="0.38"/>
+        <ellipse cx="55" cy="47" rx="3.5" ry="12" fill="#6a7088" opacity="0.33"/>
+        <ellipse cx="65" cy="48" rx="3"   ry="11" fill="#6a7088" opacity="0.30"/>
+        <!-- お腹（淡色） -->
+        <ellipse cx="57" cy="58" rx="20" ry="9" fill="#c0b8a8" opacity="0.38"/>
+
+        <!-- 前足 far（胴体の前、濃） leg-a -->
+        <g class="gyunta-leg-a">
+          <rect x="67" y="63" width="7" height="15" rx="3.5" fill="#7a8098"/>
+          <ellipse cx="70.5" cy="79" rx="5.5" ry="3" fill="#7a8098"/>
+        </g>
+        <!-- 前足 near（最前面、明） leg-b -->
+        <g class="gyunta-leg-b">
+          <rect x="75" y="63" width="7" height="15" rx="3.5" fill="#8a90a8"/>
+          <ellipse cx="78.5" cy="79" rx="5.5" ry="3" fill="#8a90a8"/>
+        </g>
+
+        <!-- 首（胴体と頭をつなぐ） -->
+        <ellipse cx="83" cy="49" rx="11" ry="12" fill="#8a90a8"/>
+
+        <!-- 頭 -->
+        <circle cx="93" cy="37" r="18" fill="#8a90a8"/>
+        <!-- 頭のタビー縞 -->
+        <path d="M83 25 Q85 18 87 25" stroke="#6a7088" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+        <path d="M91 22 Q93 15 95 22" stroke="#6a7088" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+        <path d="M99 25 Q101 18 103 25" stroke="#6a7088" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+
+        <!-- 耳 far -->
+        <polygon points="81,26 77,12 91,20" fill="#8a90a8"/>
+        <polygon points="81,25 79,15 89,21" fill="#d4a0a8" opacity="0.85"/>
+        <!-- 耳 near -->
+        <polygon points="100,22 102,9 112,21" fill="#8a90a8"/>
+        <polygon points="101,22 103,11 110,21" fill="#d4a0a8" opacity="0.85"/>
+
+        <!-- マズル（淡） -->
+        <ellipse cx="98" cy="43" rx="11" ry="9" fill="#b0a890" opacity="0.32"/>
+
+        <!-- 目（黄緑） -->
+        <ellipse cx="100" cy="34" rx="5.5" ry="6.5" fill="#c8d420"/>
+        <ellipse cx="100" cy="34" rx="3.5" ry="4.5" fill="#8aaa10"/>
+        <ellipse cx="100" cy="34" rx="2.2" ry="3.8" fill="#1a1f2e"/>
+        <ellipse cx="98"  cy="32" rx="1.5" ry="2"   fill="#ffffff" opacity="0.92"/>
+
+        <!-- 鼻 -->
+        <ellipse cx="107" cy="42" rx="4" ry="2.8" fill="#e090a0"/>
+        <!-- 口 -->
+        <path d="M104 45 Q107 48 110 45" stroke="#c06878" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+
+        <!-- ひげ（右向きに伸びる） -->
+        <line x1="110" y1="40" x2="144" y2="36" stroke="#ffffff" stroke-width="1"   opacity="0.72"/>
+        <line x1="110" y1="43" x2="144" y2="43" stroke="#ffffff" stroke-width="1"   opacity="0.68"/>
+        <line x1="110" y1="46" x2="143" y2="50" stroke="#ffffff" stroke-width="1"   opacity="0.65"/>
+
+      </svg>
+    </div>
+  </div>
 
   <div class="hero-wave" aria-hidden="true">
     <svg viewBox="0 0 1440 72" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="height:72px;">
