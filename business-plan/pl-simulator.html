@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PLシミュレーター — 夜散歩アイス</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0f1117;
+      color: #e8eaf0;
+      min-height: 100vh;
+      padding: 24px 16px 48px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      margin-bottom: 4px;
+      color: #fff;
+    }
+    .subtitle {
+      text-align: center;
+      font-size: 0.78rem;
+      color: #8b8fa8;
+      margin-bottom: 28px;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    @media (max-width: 680px) {
+      .layout { grid-template-columns: 1fr; }
+    }
+
+    .card {
+      background: #1a1d2e;
+      border: 1px solid #2a2d3e;
+      border-radius: 14px;
+      padding: 20px 22px;
+    }
+    .card h2 {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #6b7aaa;
+      margin-bottom: 18px;
+    }
+
+    /* Sliders */
+    .param-row {
+      margin-bottom: 18px;
+    }
+    .param-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 6px;
+    }
+    .param-name {
+      font-size: 0.85rem;
+      color: #c8cce0;
+    }
+    .param-value {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #7eb8f7;
+      min-width: 72px;
+      text-align: right;
+    }
+    input[type="range"] {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 5px;
+      border-radius: 3px;
+      background: #2e3150;
+      outline: none;
+      cursor: pointer;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #7eb8f7;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    input[type="range"]::-webkit-slider-thumb:hover { background: #aed1ff; }
+
+    /* KPI cards */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .kpi {
+      background: #12142080;
+      border: 1px solid #2a2d3e;
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+    .kpi-label {
+      font-size: 0.68rem;
+      color: #6b7aaa;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .kpi-amount {
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+    .kpi-amount.positive { color: #5de5a0; }
+    .kpi-amount.negative { color: #f07070; }
+    .kpi-amount.neutral  { color: #e8eaf0; }
+    .kpi-amount.blue     { color: #7eb8f7; }
+
+    /* Break-even */
+    .breakeven {
+      background: #12142080;
+      border: 1px solid #2a2d3e;
+      border-radius: 10px;
+      padding: 14px 16px;
+      font-size: 0.85rem;
+      line-height: 1.6;
+      color: #c8cce0;
+    }
+    .breakeven .be-value {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #f7c96a;
+    }
+
+    /* Chart */
+    .chart-card {
+      grid-column: 1 / -1;
+    }
+    .chart-wrap {
+      position: relative;
+      height: 240px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>🍦 夜散歩アイス — PLシミュレーター</h1>
+<p class="subtitle">スライダーを動かして収支をシミュレーション（数字はすべて仮置き）</p>
+
+<div class="layout">
+
+  <!-- パラメーター入力 -->
+  <div class="card">
+    <h2>パラメーター設定</h2>
+
+    <div class="param-row">
+      <div class="param-label">
+        <span class="param-name">営業回数（月）</span>
+        <span class="param-value" id="val-sessions">4 回</span>
+      </div>
+      <input type="range" id="sessions" min="1" max="12" value="4" step="1">
+    </div>
+
+    <div class="param-row">
+      <div class="param-label">
+        <span class="param-name">1回あたり販売数</span>
+        <span class="param-value" id="val-qty">20 個</span>
+      </div>
+      <input type="range" id="qty" min="5" max="50" value="20" step="1">
+    </div>
+
+    <div class="param-row">
+      <div class="param-label">
+        <span class="param-name">客単価</span>
+        <span class="param-value" id="val-price">600 円</span>
+      </div>
+      <input type="range" id="price" min="400" max="1000" value="600" step="50">
+    </div>
+
+    <div class="param-row">
+      <div class="param-label">
+        <span class="param-name">原価率</span>
+        <span class="param-value" id="val-cogs">35 %</span>
+      </div>
+      <input type="range" id="cogs" min="20" max="60" value="35" step="1">
+    </div>
+
+    <div class="param-row">
+      <div class="param-label">
+        <span class="param-name">出店料（1回）</span>
+        <span class="param-value" id="val-rent">3,000 円</span>
+      </div>
+      <input type="range" id="rent" min="0" max="8000" value="3000" step="500">
+    </div>
+
+    <div class="param-row">
+      <div class="param-label">
+        <span class="param-name">消耗品費（1回）</span>
+        <span class="param-value" id="val-misc">500 円</span>
+      </div>
+      <input type="range" id="misc" min="0" max="2000" value="500" step="100">
+    </div>
+  </div>
+
+  <!-- 結果表示 -->
+  <div class="card">
+    <h2>今月の損益</h2>
+
+    <div class="kpi-grid">
+      <div class="kpi">
+        <div class="kpi-label">月間売上</div>
+        <div class="kpi-amount blue" id="kpi-revenue">—</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">月間コスト</div>
+        <div class="kpi-amount neutral" id="kpi-cost">—</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">月間粗利</div>
+        <div class="kpi-amount" id="kpi-profit">—</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">1回あたり粗利</div>
+        <div class="kpi-amount" id="kpi-profit-per">—</div>
+      </div>
+    </div>
+
+    <div class="breakeven" id="breakeven-box">—</div>
+  </div>
+
+  <!-- グラフ -->
+  <div class="card chart-card">
+    <h2>営業回数別　月間損益（1〜12回）</h2>
+    <div class="chart-wrap">
+      <canvas id="chart"></canvas>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const fmt = n => Math.round(n).toLocaleString('ja-JP') + ' 円';
+
+  const ids = ['sessions','qty','price','cogs','rent','misc'];
+  const displays = {
+    sessions: v => `${v} 回`,
+    qty:      v => `${v} 個`,
+    price:    v => `${Number(v).toLocaleString()} 円`,
+    cogs:     v => `${v} %`,
+    rent:     v => `${Number(v).toLocaleString()} 円`,
+    misc:     v => `${Number(v).toLocaleString()} 円`,
+  };
+
+  function getParams() {
+    return {
+      sessions: +document.getElementById('sessions').value,
+      qty:      +document.getElementById('qty').value,
+      price:    +document.getElementById('price').value,
+      cogs:     +document.getElementById('cogs').value / 100,
+      rent:     +document.getElementById('rent').value,
+      misc:     +document.getElementById('misc').value,
+    };
+  }
+
+  function calcPL(p, sessions) {
+    const revenue = sessions * p.qty * p.price;
+    const costGoods = revenue * p.cogs;
+    const costFixed = sessions * (p.rent + p.misc);
+    const cost = costGoods + costFixed;
+    const profit = revenue - cost;
+    return { revenue, cost, profit };
+  }
+
+  // 損益分岐点: 何回営業すれば月間粗利≥0 か
+  function calcBreakEven(p) {
+    // profit = sessions * qty * price * (1 - cogs) - sessions * (rent + misc)
+    // = sessions * [ qty*price*(1-cogs) - (rent+misc) ]
+    const profitPerSession = p.qty * p.price * (1 - p.cogs) - (p.rent + p.misc);
+    if (profitPerSession <= 0) return null; // 1回でも赤字
+    return Math.ceil(0 / profitPerSession); // 常に1回目から黒字なら0→1
+    // 実際は固定費0なのでprofitPerSession>0なら1回から黒字
+  }
+
+  // Chart.js インスタンス
+  const ctx = document.getElementById('chart').getContext('2d');
+  const chart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: Array.from({length:12}, (_,i)=>`${i+1}回`),
+      datasets: [{
+        label: '月間粗利（円）',
+        data: [],
+        backgroundColor: [],
+        borderRadius: 5,
+        borderSkipped: false,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: ctx => `  粗利: ${Math.round(ctx.raw).toLocaleString()} 円`
+          }
+        }
+      },
+      scales: {
+        x: {
+          ticks: { color: '#6b7aaa', font: { size: 11 } },
+          grid:  { color: '#1e2138' },
+        },
+        y: {
+          ticks: {
+            color: '#6b7aaa',
+            font: { size: 11 },
+            callback: v => v.toLocaleString()
+          },
+          grid: { color: '#1e2138' },
+        }
+      }
+    }
+  });
+
+  function update() {
+    const p = getParams();
+
+    // スライダー表示更新
+    ids.forEach(id => {
+      document.getElementById(`val-${id}`).textContent = displays[id](document.getElementById(id).value);
+    });
+
+    // 現在の営業回数での損益
+    const { revenue, cost, profit } = calcPL(p, p.sessions);
+    const profitPerSession = profit / p.sessions;
+
+    document.getElementById('kpi-revenue').textContent = fmt(revenue);
+    document.getElementById('kpi-cost').textContent = fmt(cost);
+
+    const profitEl = document.getElementById('kpi-profit');
+    profitEl.textContent = fmt(profit);
+    profitEl.className = 'kpi-amount ' + (profit >= 0 ? 'positive' : 'negative');
+
+    const ppEl = document.getElementById('kpi-profit-per');
+    ppEl.textContent = fmt(profitPerSession);
+    ppEl.className = 'kpi-amount ' + (profitPerSession >= 0 ? 'positive' : 'negative');
+
+    // 損益分岐点
+    const profitPerSess = p.qty * p.price * (1 - p.cogs) - (p.rent + p.misc);
+    const beBox = document.getElementById('breakeven-box');
+    if (profitPerSess <= 0) {
+      beBox.innerHTML = `⚠️ 現在の設定では<strong>1回営業しても赤字</strong>です。客単価・販売数を上げるか、コストを下げてください。`;
+    } else {
+      beBox.innerHTML = `✅ 1回あたりの粗利は <span class="be-value">${fmt(profitPerSess)}</span>。<br>この設定では <span class="be-value">1回目から黒字</span> です。月${p.sessions}回で <span class="be-value">${fmt(profit)}</span>。`;
+    }
+
+    // グラフ更新
+    const profits = Array.from({length:12}, (_,i) => calcPL(p, i+1).profit);
+    chart.data.datasets[0].data = profits;
+    chart.data.datasets[0].backgroundColor = profits.map(v =>
+      v >= 0 ? 'rgba(93,229,160,0.7)' : 'rgba(240,112,112,0.7)'
+    );
+    chart.update('none');
+  }
+
+  ids.forEach(id => document.getElementById(id).addEventListener('input', update));
+  update();
+</script>
+</body>
+</html>
