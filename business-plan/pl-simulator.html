@@ -151,12 +151,38 @@
       position: relative;
       height: 240px;
     }
+
+    /* Business plan button */
+    .bp-btn-wrap {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+    .bp-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #7eb8f7 0%, #5de5a0 100%);
+      color: #0f1117;
+      font-weight: 700;
+      font-size: 0.88rem;
+      border: none;
+      border-radius: 10px;
+      padding: 11px 22px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.15s, transform 0.1s;
+    }
+    .bp-btn:hover { opacity: 0.88; transform: translateY(-1px); }
   </style>
 </head>
 <body>
 
 <h1>🍦 夜散歩アイス — PLシミュレーター</h1>
 <p class="subtitle">スライダーを動かして収支をシミュレーション（数字はすべて仮置き）</p>
+
+<div class="bp-btn-wrap">
+  <a href="index.html" class="bp-btn">📄 事業計画書を見る</a>
+</div>
 
 <div class="layout">
 

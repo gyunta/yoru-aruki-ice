@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>事業計画書 — 夜散歩アイス</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0f1117;
+      color: #e8eaf0;
+      min-height: 100vh;
+      padding: 24px 16px 64px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .page-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .page-header h1 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+    .page-header .meta {
+      font-size: 0.78rem;
+      color: #6b7aaa;
+    }
+
+    /* Back link */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.82rem;
+      color: #7eb8f7;
+      text-decoration: none;
+      margin-bottom: 32px;
+      transition: color 0.15s;
+    }
+    .back-link:hover { color: #aed1ff; }
+
+    /* Section cards */
+    .section {
+      background: #1a1d2e;
+      border: 1px solid #2a2d3e;
+      border-radius: 14px;
+      padding: 24px 28px;
+      margin-bottom: 20px;
+    }
+    .section h2 {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #6b7aaa;
+      margin-bottom: 18px;
+    }
+    .section h2 .num {
+      color: #7eb8f7;
+      margin-right: 6px;
+    }
+
+    /* Concept block */
+    .concept-quote {
+      border-left: 3px solid #7eb8f7;
+      padding: 12px 18px;
+      background: #12142080;
+      border-radius: 0 10px 10px 0;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 16px;
+    }
+
+    p {
+      font-size: 0.9rem;
+      line-height: 1.75;
+      color: #c8cce0;
+    }
+
+    /* Lists */
+    ul {
+      list-style: none;
+      margin-top: 4px;
+    }
+    ul li {
+      font-size: 0.88rem;
+      line-height: 1.7;
+      color: #c8cce0;
+      padding-left: 1.2em;
+      position: relative;
+    }
+    ul li::before {
+      content: '–';
+      position: absolute;
+      left: 0;
+      color: #7eb8f7;
+    }
+
+    /* Tables */
+    .tbl-wrap {
+      overflow-x: auto;
+      margin-top: 8px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+    th, td {
+      padding: 10px 14px;
+      text-align: left;
+      border-bottom: 1px solid #2a2d3e;
+    }
+    th {
+      color: #6b7aaa;
+      font-weight: 600;
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      background: #12142060;
+    }
+    td { color: #c8cce0; }
+    tr:last-child td { border-bottom: none; }
+    td strong, .highlight { color: #5de5a0; font-weight: 700; }
+
+    /* Roadmap phases */
+    .phase-grid {
+      display: grid;
+      gap: 12px;
+      margin-top: 4px;
+    }
+    .phase {
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: 12px;
+      align-items: start;
+      background: #12142080;
+      border: 1px solid #2a2d3e;
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+    .phase-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #7eb8f7;
+      letter-spacing: 0.06em;
+    }
+    .phase-time {
+      font-size: 0.7rem;
+      color: #6b7aaa;
+      margin-top: 2px;
+    }
+    .phase-desc {
+      font-size: 0.85rem;
+      color: #c8cce0;
+      line-height: 1.6;
+    }
+
+    /* Risk badges */
+    .risk-grid {
+      display: grid;
+      gap: 10px;
+      margin-top: 4px;
+    }
+    .risk-item {
+      background: #12142080;
+      border: 1px solid #2a2d3e;
+      border-radius: 10px;
+      padding: 12px 16px;
+    }
+    .risk-title {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #f07070;
+      margin-bottom: 4px;
+    }
+    .risk-action {
+      font-size: 0.82rem;
+      color: #c8cce0;
+      line-height: 1.55;
+    }
+
+    /* SNS channel pills */
+    .channel-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 4px;
+    }
+    .channel {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .channel-name {
+      min-width: 90px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #7eb8f7;
+      background: #12142080;
+      border: 1px solid #2a2d3e;
+      border-radius: 6px;
+      padding: 3px 10px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+    .channel-desc {
+      font-size: 0.84rem;
+      color: #c8cce0;
+      line-height: 1.55;
+    }
+
+    /* PL summary highlight boxes */
+    .kpi-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .kpi {
+      background: #12142080;
+      border: 1px solid #2a2d3e;
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+    .kpi-label {
+      font-size: 0.68rem;
+      color: #6b7aaa;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .kpi-value {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #5de5a0;
+    }
+
+    /* Investment total */
+    .invest-total {
+      margin-top: 14px;
+      background: #12142080;
+      border: 1px solid #f7c96a40;
+      border-radius: 10px;
+      padding: 14px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .invest-total-label {
+      font-size: 0.85rem;
+      color: #c8cce0;
+      font-weight: 600;
+    }
+    .invest-total-value {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #f7c96a;
+    }
+
+    .footnote {
+      text-align: center;
+      font-size: 0.75rem;
+      color: #4a4f6a;
+      margin-top: 32px;
+    }
+
+    /* Simulator button */
+    .sim-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #7eb8f7 0%, #5de5a0 100%);
+      color: #0f1117;
+      font-weight: 700;
+      font-size: 0.88rem;
+      border: none;
+      border-radius: 10px;
+      padding: 12px 22px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.15s, transform 0.1s;
+      margin-top: 4px;
+    }
+    .sim-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <a href="pl-simulator.html" class="back-link">← PLシミュレーターに戻る</a>
+
+  <div class="page-header">
+    <h1>🍦 事業計画書　夜散歩アイス</h1>
+    <p class="meta">作成日：2026年5月31日　版：v1.0（仮置き数字）</p>
+  </div>
+
+  <!-- 1. コンセプト -->
+  <div class="section">
+    <h2><span class="num">1.</span> 事業コンセプト</h2>
+    <div class="concept-quote">「夜の多摩川で、立ち止まるひとときを。」</div>
+    <p>多摩川沿い（武蔵新田周辺）を夜散歩する人々に向けて、本格ジェラートをPOPUP販売する小規模事業。18〜21時という「夕涼みタイム」に、川沿いの景色と一緒に楽しめるアイスの体験を提供する。</p>
+  </div>
+
+  <!-- 2. 背景・動機 -->
+  <div class="section">
+    <h2><span class="num">2.</span> 事業の背景・動機</h2>
+    <ul>
+      <li>多摩川沿いは夜でも散歩・ジョギング・ピクニックをする人が多く、既存の飲食店が少ない時間帯がある</li>
+      <li>カップル2名の共同プロジェクトとして、楽しみながら収益を出せる形を模索</li>
+      <li>超小規模スタートで赤字を出さないことを最優先とし、手応えがあれば拡大を検討</li>
+    </ul>
+  </div>
+
+  <!-- 3. 提供商品 -->
+  <div class="section">
+    <h2><span class="num">3.</span> 提供商品</h2>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>項目</th><th>内容</th></tr></thead>
+        <tbody>
+          <tr><td>商品</td><td>本格ジェラート</td></tr>
+          <tr><td>価格帯</td><td>500〜700円（シングル〜ダブル）</td></tr>
+          <tr><td>フレーバー数</td><td>3〜5種類（季節・仕入れによって変動）</td></tr>
+          <tr><td>フレーバー例</td><td>ミルク、ストロベリー、抹茶、レモン、チョコレートなど</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 4. 営業計画 -->
+  <div class="section">
+    <h2><span class="num">4.</span> 営業計画</h2>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>項目</th><th>内容</th></tr></thead>
+        <tbody>
+          <tr><td>営業時間</td><td>18:00〜21:00（3時間）</td></tr>
+          <tr><td>頻度</td><td>週1〜2回（土日中心）</td></tr>
+          <tr><td>場所</td><td>多摩川沿い（武蔵新田周辺）のPOPUP可能エリア</td></tr>
+          <tr><td>出店形態</td><td>小型クーラーボックス＋簡易什器によるPOPUP</td></tr>
+          <tr><td>目標販売数</td><td>1回あたり15〜30個（初期は控えめに設定）</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 5. 役割分担 -->
+  <div class="section">
+    <h2><span class="num">5.</span> 役割分担</h2>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>担当者</th><th>担当業務</th></tr></thead>
+        <tbody>
+          <tr><td>二人共通</td><td>接客・販売・オペレーション</td></tr>
+          <tr><td>分担 A</td><td>SNS発信（Instagram・X）、写真撮影</td></tr>
+          <tr><td>分担 B</td><td>IT管理（Webサイト、分析）、仕入れ管理</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 6. IT・SNS戦略 -->
+  <div class="section">
+    <h2><span class="num">6.</span> IT・SNS戦略</h2>
+    <div class="channel-list">
+      <div class="channel">
+        <span class="channel-name">Instagram</span>
+        <span class="channel-desc">商品写真・川沿いの雰囲気・出店告知（ビジュアル重視）</span>
+      </div>
+      <div class="channel">
+        <span class="channel-name">X（旧Twitter）</span>
+        <span class="channel-desc">当日の出店情報・リアルタイム告知・軽いコンテンツ</span>
+      </div>
+      <div class="channel">
+        <span class="channel-name">Webサイト</span>
+        <span class="channel-desc">出店スケジュール・メニュー・PLシミュレーター公開</span>
+      </div>
+    </div>
+    <p style="margin-top: 16px; font-size: 0.82rem; color: #6b7aaa;">運用：Claude Codeを活用してコーディングレスで更新可能な体制を構築。GitHub Pagesで無料ホスティング（独自ドメインは将来検討）。</p>
+  </div>
+
+  <!-- 7. 収支計画 -->
+  <div class="section">
+    <h2><span class="num">7.</span> 収支計画</h2>
+
+    <p style="font-size: 0.78rem; color: #6b7aaa; margin-bottom: 14px;">基本パラメーター（仮置き）</p>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>項目</th><th>数値</th></tr></thead>
+        <tbody>
+          <tr><td>客単価</td><td>600円</td></tr>
+          <tr><td>原価率</td><td>35%（1個あたり原価 約210円）</td></tr>
+          <tr><td>出店料</td><td>0〜3,000円/回（場所による）</td></tr>
+          <tr><td>消耗品費</td><td>500円/回</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="font-size: 0.78rem; color: #6b7aaa; margin: 20px 0 14px;">月間損益シミュレーション（月4回営業・1回20個販売の場合）</p>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>項目</th><th>金額</th></tr></thead>
+        <tbody>
+          <tr><td>月間売上</td><td>48,000円</td></tr>
+          <tr><td>原価（35%）</td><td>16,800円</td></tr>
+          <tr><td>出店料合計</td><td>12,000円（3,000円×4回）</td></tr>
+          <tr><td>消耗品費合計</td><td>2,000円（500円×4回）</td></tr>
+          <tr><td><strong>月間粗利</strong></td><td><strong>17,200円</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="font-size: 0.78rem; color: #6b7aaa; margin: 20px 0 14px;">収支レンジ</p>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>シナリオ</th><th>営業回数</th><th>販売数/回</th><th>月間粗利</th></tr></thead>
+        <tbody>
+          <tr><td>最低</td><td>月1回</td><td>10個</td><td>約1,800円</td></tr>
+          <tr><td>標準</td><td>月4回</td><td>20個</td><td>約18,000円</td></tr>
+          <tr><td>好調</td><td>月8回</td><td>30個</td><td>約54,000円</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="margin-top: 20px; text-align: center;">
+      <a href="pl-simulator.html" class="sim-btn">📊 PLシミュレーターで試す</a>
+    </div>
+  </div>
+
+  <!-- 8. 初期投資 -->
+  <div class="section">
+    <h2><span class="num">8.</span> 初期投資</h2>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>項目</th><th>費用（概算）</th></tr></thead>
+        <tbody>
+          <tr><td>保冷クーラーボックス</td><td>10,000〜20,000円</td></tr>
+          <tr><td>簡易什器・テーブル</td><td>5,000〜15,000円</td></tr>
+          <tr><td>食器・スプーン等</td><td>3,000〜5,000円</td></tr>
+          <tr><td>ブランドロゴ・印刷物</td><td>5,000〜10,000円</td></tr>
+          <tr><td>初回仕入れ費用</td><td>5,000〜15,000円</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="invest-total">
+      <span class="invest-total-label">合計（概算）</span>
+      <span class="invest-total-value">約30,000〜80,000円</span>
+    </div>
+  </div>
+
+  <!-- 9. リスクと対策 -->
+  <div class="section">
+    <h2><span class="num">9.</span> リスクと対策</h2>
+    <div class="risk-grid">
+      <div class="risk-item">
+        <div class="risk-title">天候不順による出店中止</div>
+        <div class="risk-action">SNSで事前告知・振替日を設定。在庫を最小限に仕入れ</div>
+      </div>
+      <div class="risk-item">
+        <div class="risk-title">販売数が想定を下回る</div>
+        <div class="risk-action">仕入れ数を絞り、売り切りで運営。在庫ロスを防ぐ</div>
+      </div>
+      <div class="risk-item">
+        <div class="risk-title">出店場所の許可取得</div>
+        <div class="risk-action">公共スペースの利用ルールを事前確認・遵守</div>
+      </div>
+      <div class="risk-item">
+        <div class="risk-title">食品衛生リスク</div>
+        <div class="risk-action">食品衛生責任者資格取得を検討。保冷管理を徹底</div>
+      </div>
+      <div class="risk-item">
+        <div class="risk-title">モチベーション低下</div>
+        <div class="risk-action">楽しさ優先・無理のないペース設定。赤字なら即縮小</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10. ロードマップ -->
+  <div class="section">
+    <h2><span class="num">10.</span> ロードマップ</h2>
+    <div class="phase-grid">
+      <div class="phase">
+        <div>
+          <div class="phase-label">Phase 0</div>
+          <div class="phase-time">〜2026年6月</div>
+        </div>
+        <div class="phase-desc">計画策定・仕入れ先調査・出店場所リサーチ</div>
+      </div>
+      <div class="phase">
+        <div>
+          <div class="phase-label">Phase 1</div>
+          <div class="phase-time">2026年7月</div>
+        </div>
+        <div class="phase-desc">初出店（テスト営業）・SNSアカウント開設</div>
+      </div>
+      <div class="phase">
+        <div>
+          <div class="phase-label">Phase 2</div>
+          <div class="phase-time">2026年8〜9月</div>
+        </div>
+        <div class="phase-desc">夏本番・営業頻度を徐々に増加・フィードバック収集</div>
+      </div>
+      <div class="phase">
+        <div>
+          <div class="phase-label">Phase 3</div>
+          <div class="phase-time">2026年秋以降</div>
+        </div>
+        <div class="phase-desc">収支を見て継続判断・Webサイト本格整備・独自ドメイン検討</div>
+      </div>
+    </div>
+  </div>
+
+  <p class="footnote">数字はすべて仮置き。実際の仕入れ先・出店料が決まり次第、随時更新予定。</p>
+
+</div>
+</body>
+</html>
