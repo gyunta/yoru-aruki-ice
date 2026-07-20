@@ -355,6 +355,94 @@
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
   }
+  /* ===== コンセプトボタン・モーダル ===== */
+  .concept-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0px;
+    margin: 22px auto 0;
+    width: 64px;
+    height: 88px;
+    background: none;
+    border: none;
+    -webkit-tap-highlight-color: transparent;
+    animation: bottleFloat 3.2s ease-in-out infinite;
+  }
+  .concept-btn .seal-label {
+    font-size: 9px;
+    font-weight: 700;
+    color: #7a5c2e;
+    letter-spacing: 0.08em;
+    margin-top: 2px;
+  }
+  @keyframes bottleFloat {
+    0%, 100% { transform: translateY(0) rotate(-3deg); }
+    50% { transform: translateY(-7px) rotate(3deg); }
+  }
+  .concept-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 500;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(20,16,11,0.6);
+    padding: 24px;
+  }
+  .concept-modal.show { display: flex; }
+  .concept-modal-inner {
+    background: #f4e9cc;
+    border: 2px solid #8b3a1e;
+    border-radius: 8px;
+    padding: 24px 20px;
+    max-width: 340px;
+    width: 100%;
+    position: relative;
+    transform-origin: top center;
+    animation: unrollScroll 0.55s cubic-bezier(.2,.9,.3,1.1);
+  }
+  @keyframes unrollScroll {
+    0% { transform: scaleY(0.05) scaleX(0.6) rotate(-6deg); opacity: 0.3; }
+    55% { transform: scaleY(1.05) scaleX(1.02) rotate(1deg); opacity: 1; }
+    100% { transform: scaleY(1) scaleX(1) rotate(0deg); opacity: 1; }
+  }
+  .concept-modal-inner .scroll-content {
+    animation: fadeInText 0.4s ease-out 0.35s both;
+  }
+  @keyframes fadeInText {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  .concept-modal-close {
+    position: absolute;
+    top: 10px; right: 12px;
+    font-size: 18px;
+    color: #6b1e1e;
+    background: none;
+    border: none;
+  }
+  .concept-modal-title {
+    font-family: "Pirata One", serif;
+    font-size: 22px;
+    color: #6b1e1e;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  .concept-modal ul {
+    list-style: none;
+  }
+  .concept-modal li {
+    display: grid;
+    grid-template-columns: 68px 1fr;
+    gap: 10px;
+    font-size: 12.5px;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(139,58,30,0.2);
+  }
+  .concept-modal li:last-child { border-bottom: none; }
+  .concept-modal .k { font-weight: 700; color: #8b3a1e; }
 </style>
 </head>
 <body class="locked">
@@ -404,6 +492,40 @@
       <div class="city">仙台</div>
       <div class="sub">港のどこに錨を下ろすかは検討中</div>
     </div>
+
+    <button class="concept-btn" onclick="document.getElementById('conceptModal').classList.add('show')">
+      <svg width="40" height="64" viewBox="0 0 40 64" fill="none">
+        <!-- 瓶の胴体（ガラス風） -->
+        <path d="M12 22 Q10 26 10 34 L10 54 Q10 60 20 60 Q30 60 30 54 L30 34 Q30 26 28 22 Z"
+              fill="rgba(140,200,190,0.35)" stroke="#3a6a5a" stroke-width="1.5"/>
+        <!-- 瓶の首 -->
+        <rect x="16" y="8" width="8" height="16" rx="2" fill="rgba(140,200,190,0.35)" stroke="#3a6a5a" stroke-width="1.5"/>
+        <!-- コルク栓 -->
+        <rect x="15" y="3" width="10" height="8" rx="1.5" fill="#a97c50" stroke="#6b4a2a" stroke-width="1"/>
+        <!-- 中の巻き紙 -->
+        <rect x="14" y="32" width="12" height="20" rx="2" fill="#f4e9cc" stroke="#c9a876" stroke-width="1" transform="rotate(-8 20 42)"/>
+        <line x1="16" y1="37" x2="24" y2="36" stroke="#8b6f3c" stroke-width="0.8" transform="rotate(-8 20 42)"/>
+        <line x1="16" y1="41" x2="24" y2="40" stroke="#8b6f3c" stroke-width="0.8" transform="rotate(-8 20 42)"/>
+        <!-- ハイライト -->
+        <path d="M13 28 Q12 36 12 46" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" fill="none"/>
+      </svg>
+      <span class="seal-label">CONCEPT</span>
+    </button>
+  </div>
+
+  <!-- CONCEPT MODAL -->
+  <div class="concept-modal" id="conceptModal">
+    <div class="concept-modal-inner">
+      <button class="concept-modal-close" onclick="document.getElementById('conceptModal').classList.remove('show')">✕</button>
+      <div class="scroll-content">
+        <div class="concept-modal-title">旅のコンセプト</div>
+        <ul>
+          <li><span class="k">vol.2</span><span>箱根（転職祝い）から続く、男4人旅の2回目</span></li>
+          <li><span class="k">テーマ</span><span>結婚する2人への門出祝い</span></li>
+          <li><span class="k">乾杯を軸に</span><span>移動中も、店でも、とにかく飲む</span></li>
+        </ul>
+      </div>
+    </div>
   </div>
 
   <!-- STAY -->
@@ -420,49 +542,6 @@
       <span class="treasure-text">船室の詳細を見る</span>
       <span class="treasure-arrow">→</span>
     </a>
-  </section>
-
-  <!-- KANPAI POINTS -->
-  <section>
-    <div class="sec-label">🍺 宝の一杯</div>
-    <ul class="log-list">
-      <li>
-        <div class="log-icon">🍺</div>
-        <div><div class="log-scene">1杯目 — 出航・車内</div><div class="log-desc">門出の前祝い、航海のはじまりの一杯</div></div>
-      </li>
-      <li>
-        <div class="log-icon">🐂</div>
-        <div><div class="log-scene">2杯目 — 上陸・牛タン</div><div class="log-desc">仙台の港に到着、航海の本格スタートを祝う</div></div>
-      </li>
-      <li>
-        <div class="log-icon">🦪</div>
-        <div><div class="log-scene">3杯目 — 食べ歩き前編</div><div class="log-desc">軽く立ち寄りながら牡蠣をつまむ</div></div>
-      </li>
-      <li>
-        <div class="log-icon">⚓</div>
-        <div><div class="log-scene">4杯目 — 船で一息</div><div class="log-desc">船室で休憩しながら軽く一杯</div></div>
-      </li>
-      <li>
-        <div class="log-icon">🚶</div>
-        <div><div class="log-scene">5杯目 — 食べ歩き後編</div><div class="log-desc">本番の前にもう少し街をつまみ食い</div></div>
-      </li>
-      <li>
-        <div class="log-icon">🍶</div>
-        <div><div class="log-scene">6杯目 — 国分町・本番</div><div class="log-desc">誰かが一言、仲間の門出に本気の祝杯</div></div>
-      </li>
-      <li>
-        <div class="log-icon">🍺</div>
-        <div><div class="log-scene">7杯目 — 醸造所襲撃</div><div class="log-desc">キリンビール仙台工場で一番搾りを飲み比べ</div></div>
-      </li>
-      <li>
-        <div class="log-icon">🍻</div>
-        <div><div class="log-scene">8杯目 — 港での最後の乾杯</div><div class="log-desc">出航までの時間で最後の一杯</div></div>
-      </li>
-      <li>
-        <div class="log-icon">🥂</div>
-        <div><div class="log-scene">しめ — 帰りの船上</div><div class="log-desc">航海を締める、しめの一杯</div></div>
-      </li>
-    </ul>
   </section>
 
   <!-- SCHEDULE -->
@@ -610,7 +689,7 @@
   var dragging = false;
   var lastAngle = 0;
   var opened = false;
-  var neededTurns = 3;
+  var neededTurns = 2;
 
   function getCenter() {
     var rect = wheelWrap.getBoundingClientRect();
