@@ -288,16 +288,45 @@
     position: fixed;
     inset: 0;
     z-index: 9999;
-    background: #14100b;
+    background: #0d0a07;
     background-image:
-      radial-gradient(circle at 50% 40%, rgba(139,111,60,0.25), transparent 60%),
-      repeating-radial-gradient(circle at 50% 50%, rgba(139,111,60,0.05) 0px, rgba(139,111,60,0.05) 1px, transparent 1px, transparent 6px);
+      url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MDAiIGhlaWdodD0iMTIwMCIgdmlld0JveD0iMCAwIDgwMCAxMjAwIj4KPHJlY3Qgd2lkdGg9IjgwMCIgaGVpZ2h0PSIxMjAwIiBmaWxsPSJub25lIi8+CjwhLS0g5rOi57ea44OR44K/44O844OzIC0tPgo8ZyBzdHJva2U9IiM4YjZmM2MiIHN0cm9rZS13aWR0aD0iMSIgZmlsbD0ibm9uZSIgb3BhY2l0eT0iMC41Ij4KPHBhdGggZD0iTTAgNjAgUTQwIDUwIDgwIDYwIFQxNjAgNjAgVDI0MCA2MCBUMzIwIDYwIFQ0MDAgNjAgVDQ4MCA2MCBUNTYwIDYwIFQ2NDAgNjAgVDcyMCA2MCBUODAwIDYwIi8+CjxwYXRoIGQ9Ik0wIDE0MCBRNDAgMTMwIDgwIDE0MCBUMTYwIDE0MCBUMjQwIDE0MCBUMzIwIDE0MCBUNDAwIDE0MCBUNDgwIDE0MCBUNTYwIDE0MCBUNjQwIDE0MCBUNzIwIDE0MCBUODAwIDE0MCIvPgo8cGF0aCBkPSJNMCAzMjAgUTQwIDMxMCA4MCAzMjAgVDE2MCAzMjAgVDI0MCAzMjAgVDMyMCAzMjAgVDQwMCAzMjAgVDQ4MCAzMjAgVDU2MCAzMjAgVDY0MCAzMjAgVDcyMCAzMjAgVDgwMCAzMjAiLz4KPHBhdGggZD0iTTAgNDgwIFE0MCA0NzAgODAgNDgwIFQxNjAgNDgwIFQyNDAgNDgwIFQzMjAgNDgwIFQ0MDAgNDgwIFQ0ODAgNDgwIFQ1NjAgNDgwIFQ2NDAgNDgwIFQ3MjAgNDgwIFQ4MDAgNDgwIi8+CjxwYXRoIGQ9Ik0wIDYyMCBRNDAgNjEwIDgwIDYyMCBUMTYwIDYyMCBUMjQwIDYyMCBUMzIwIDYyMCBUNDAwIDYyMCBUNDgwIDYyMCBUNTYwIDYyMCBUNjQwIDYyMCBUNzIwIDYyMCBUODAwIDYyMCIvPgo8cGF0aCBkPSJNMCA3ODAgUTQwIDc3MCA4MCA3ODAgVDE2MCA3ODAgVDI0MCA3ODAgVDMyMCA3ODAgVDQwMCA3ODAgVDQ4MCA3ODAgVDU2MCA3ODAgVDY0MCA3ODAgVDcyMCA3ODAgVDgwMCA3ODAiLz4KPHBhdGggZD0iTTAgOTQwIFE0MCA5MzAgODAgOTQwIFQxNjAgOTQwIFQyNDAgOTQwIFQzMjAgOTQwIFQ0MDAgOTQwIFQ0ODAgOTQwIFQ1NjAgOTQwIFQ2NDAgOTQwIFQ3MjAgOTQwIFQ4MDAgOTQwIi8+CjxwYXRoIGQ9Ik0wIDEwODAgUTQwIDEwNzAgODAgMTA4MCBUMTYwIDEwODAgVDI0MCAxMDgwIFQzMjAgMTA4MCBUNDAwIDEwODAgVDQ4MCAxMDgwIFQ1NjAgMTA4MCBUNjQwIDEwODAgVDcyMCAxMDgwIFQ4MDAgMTA4MCIvPgo8L2c+CjwhLS0g44Kz44Oz44OR44K544Ot44O844K6IDEgLS0+CjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDY1MCwyMjApIiBzdHJva2U9IiM4YjZmM2MiIHN0cm9rZS13aWR0aD0iMS4yIiBmaWxsPSJub25lIiBvcGFjaXR5PSIwLjU1Ij4KPGNpcmNsZSByPSI1NSIvPgo8Y2lyY2xlIHI9IjM4Ii8+CjxwYXRoIGQ9Ik0wIC01NSBMMCA1NSBNLTU1IDAgTDU1IDAiLz4KPHBhdGggZD0iTS0zOSAtMzkgTDM5IDM5IE0tMzkgMzkgTDM5IC0zOSIvPgo8cGF0aCBkPSJNMCAtNTUgTDggLTIwIEwwIDAgTC04IC0yMCBaIiBmaWxsPSIjOGI2ZjNjIiBvcGFjaXR5PSIwLjQiLz4KPC9nPgo8IS0tIOOCs+ODs+ODkeOCueODreODvOOCuiAy77yI5bCP44GV44KB77yJIC0tPgo8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxMTAsNzgwKSIgc3Ryb2tlPSIjOGI2ZjNjIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiIG9wYWNpdHk9IjAuNDUiPgo8Y2lyY2xlIHI9IjM1Ii8+CjxwYXRoIGQ9Ik0wIC0zNSBMMCAzNSBNLTM1IDAgTDM1IDAiLz4KPHBhdGggZD0iTS0yNSAtMjUgTDI1IDI1IE0tMjUgMjUgTDI1IC0yNSIvPgo8L2c+CjwhLS0g54K557ea44Gu6Iiq6LevIC0tPgo8ZyBzdHJva2U9IiM4YjNhMWUiIHN0cm9rZS13aWR0aD0iMS41IiBmaWxsPSJub25lIiBzdHJva2UtZGFzaGFycmF5PSI0IDUiIG9wYWNpdHk9IjAuNCI+CjxwYXRoIGQ9Ik02MCAxMDAgUTMwMCAzMDAgMjUwIDU1MCBUNTAwIDkwMCBUNzAwIDExNTAiLz4KPC9nPgo8IS0tIOWztuW9sSAtLT4KPGcgZmlsbD0iIzhiNmYzYyIgb3BhY2l0eT0iMC4xOCI+CjxwYXRoIGQ9Ik0xMjAgMjAwIFExNjAgMTgwIDIwMCAxOTUgUTIzMCAyMTAgMjEwIDI0MCBRMTcwIDI2MCAxMzAgMjQwIFExMDAgMjIwIDEyMCAyMDAgWiIvPgo8cGF0aCBkPSJNNTUwIDUwMCBRNjAwIDQ4MCA2NDAgNTA1IFE2NjAgNTMwIDYzMCA1NTUgUTU4MCA1NzAgNTQ1IDU0NSBRNTI1IDUyMCA1NTAgNTAwIFoiLz4KPHBhdGggZD0iTTIwMCA5MDAgUTI1MCA4ODAgMjkwIDkwNSBRMzA1IDkzMCAyNzUgOTUwIFEyMzAgOTY1IDE5NSA5NDAgUTE4MCA5MTggMjAwIDkwMCBaIi8+CjxwYXRoIGQ9Ik02MDAgMTAwMCBRNjQwIDk4NSA2NzAgMTAwNSBRNjg1IDEwMjUgNjYwIDEwNDUgUTYyNSAxMDU1IDU5NSAxMDM1IFE1ODMgMTAxNSA2MDAgMTAwMCBaIi8+CjwvZz4KCjwhLS0g5rW3546L6aGe77yI44K344O844K144O844Oa44Oz44OI6aKo44K344Or44Ko44OD44OI77yJIDE6IOWkp+OBjeOCgeOAgeS9k+OCkuOBj+OBreOCieOBm+OBpua1t+mdouOBi+OCiemhlOOCkuWHuuOBmSAtLT4KPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNTAwLDE1MCkgc2NhbGUoMS4xKSIgZmlsbD0iIzhiNmYzYyIgb3BhY2l0eT0iMC4yOCI+CiAgPCEtLSDog7TkvZPjga7ms6IgLS0+CiAgPHBhdGggZD0iTS02MCAzMCBRLTMwIC0xMCAwIDIwIFEzMCA1MCA2MCAxNSBROTAgLTE1IDEyMCAxMCIKICAgICAgICBzdHJva2U9IiM4YjZmM2MiIHN0cm9rZS13aWR0aD0iOSIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPCEtLSDog4zjgbPjgowgLS0+CiAgPHBhdGggZD0iTS0zMCA1IEwtMjIgLTE4IEwtMTQgNSBaIi8+CiAgPHBhdGggZD0iTTIwIDMwIEwyOCA4IEwzNiAzMCBaIi8+CiAgPCEtLSDpoK3pg6ggLS0+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTIwLDEwKSI+CiAgICA8cGF0aCBkPSJNMCAwIFExOCAtMTQgMzQgLTQgUTQyIDIgMzYgMTIgUTI2IDIyIDEwIDE2IFEtNCAxMCAwIDAgWiIvPgogICAgPCEtLSDnm64gLS0+CiAgICA8Y2lyY2xlIGN4PSIyNiIgY3k9Ii0yIiByPSIyIiBmaWxsPSIjNWE0NTI2Ii8+CiAgICA8IS0tIOinkiAtLT4KICAgIDxwYXRoIGQ9Ik0xMCAtMTAgTDQgLTIyIEwxNiAtMTQgWiIvPgogIDwvZz4KPC9nPgoKPCEtLSDmtbfnjovpoZ4gMjog5Lit44K144Kk44K644CB5LiL6YOo44Gr6YWN572u44CB44Go44GQ44KN44KS5be744GP44KI44GG44Gq5b2iIC0tPgo8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxNTAsNTQwKSBzY2FsZSgwLjg1KSIgZmlsbD0iIzhiNmYzYyIgb3BhY2l0eT0iMC4yMiI+CiAgPHBhdGggZD0iTTAgNDAgUTMwIDEwIDU1IDM1IFE4MCA2MCAxMDAgMzAgUTEyMCA1IDE0NSAyNSIKICAgICAgICBzdHJva2U9IiM4YjZmM2MiIHN0cm9rZS13aWR0aD0iOCIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTQwIDIwIEw0OCAwIEw1NiAyMiBaIi8+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTQ1LDIyKSI+CiAgICA8cGF0aCBkPSJNMCAwIFExNiAtMTIgMzAgLTMgUTM3IDMgMzEgMTEgUTIyIDE5IDggMTQgUS00IDggMCAwIFoiLz4KICAgIDxjaXJjbGUgY3g9IjIyIiBjeT0iLTEiIHI9IjEuOCIgZmlsbD0iIzVhNDUyNiIvPgogICAgPHBhdGggZD0iTTggLTkgTDMgLTE5IEwxNCAtMTIgWiIvPgogIDwvZz4KPC9nPgoKPCEtLSDmtbfnjovpoZ4gMzog5bCP44GV44KB44CB5Y+z5LiLIC0tPgo8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSg1NjAsODgwKSBzY2FsZSgwLjY1KSByb3RhdGUoMTUpIiBmaWxsPSIjOGI2ZjNjIiBvcGFjaXR5PSIwLjIiPgogIDxwYXRoIGQ9Ik0wIDMwIFEyNSA4IDQ1IDI4IFE2NSA0OCA4NSAyNSIKICAgICAgICBzdHJva2U9IiM4YjZmM2MiIHN0cm9rZS13aWR0aD0iNyIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoODUsMjApIj4KICAgIDxwYXRoIGQ9Ik0wIDAgUTE0IC0xMCAyNiAtMiBRMzIgMyAyNyAxMCBRMTkgMTcgNyAxMiBRLTMgNyAwIDAgWiIvPgogICAgPGNpcmNsZSBjeD0iMTkiIGN5PSIwIiByPSIxLjUiIGZpbGw9IiM1YTQ1MjYiLz4KICA8L2c+CjwvZz4KCjwhLS0g5rW3546L6aGeIDQ6IOS4gOeVquS4i+OAgeWkp+OBjeOCgeOBruWwu+WwvuOBoOOBkeimi+OBiOOCi+a8lOWHuiAtLT4KPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzAwLDExMjApIHNjYWxlKDEuMCkiIGZpbGw9IiM4YjZmM2MiIG9wYWNpdHk9IjAuMiI+CiAgPHBhdGggZD0iTTAgMCBRMjAgLTIwIDQ1IC01IFE3MCAxMCA5MCAtMTUiCiAgICAgICAgc3Ryb2tlPSIjOGI2ZjNjIiBzdHJva2Utd2lkdGg9IjkiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxwYXRoIGQ9Ik04NSAtMjAgTDEwMCAtMzUgTDk1IC0xMCBaIi8+CjwvZz4KCjwhLS0g5rW35Zuz44Gu5paH5a2X44Gj44G944GE6KOF6aO+77yI5rOi6aO+44KK5p6g77yJIC0tPgo8ZyBzdHJva2U9IiM4YjZmM2MiIHN0cm9rZS13aWR0aD0iMC44IiBmaWxsPSJub25lIiBvcGFjaXR5PSIwLjMiPgo8cmVjdCB4PSIyMCIgeT0iMjAiIHdpZHRoPSI3NjAiIGhlaWdodD0iMTE2MCIgcng9IjYiLz4KPC9nPgo8L3N2Zz4="),
+      radial-gradient(circle at 50% 45%, rgba(255,200,120,0.18), transparent 55%);
+    background-size: 500px auto, auto;
+    background-position: center 20%, center;
+    background-repeat: no-repeat, no-repeat;
+    background-blend-mode: normal, normal;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     touch-action: none;
+    overflow: hidden;
   }
+  #wheelGate::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: #0d0a07;
+    opacity: 0.75;
+    pointer-events: none;
+  }
+  #wheelGate::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 45%, rgba(255,190,110,0.35), transparent 45%);
+    animation: candleFlicker 3.5s ease-in-out infinite;
+    pointer-events: none;
+    mix-blend-mode: screen;
+  }
+  @keyframes candleFlicker {
+    0%, 100% { opacity: 0.55; transform: scale(1); }
+    25% { opacity: 0.7; transform: scale(1.03); }
+    50% { opacity: 0.45; transform: scale(0.98); }
+    75% { opacity: 0.65; transform: scale(1.02); }
+  }
+  #wheelGate > * { position: relative; z-index: 1; }
   #wheelGate.hide { display: none; }
   .gate-kicker {
     color: #d8c8a0;
@@ -392,24 +421,62 @@
     padding: 24px;
   }
   .concept-modal.show { display: flex; }
+
+  .scroll-wrap {
+    position: relative;
+    width: 100%;
+    max-width: 320px;
+  }
+  .scroll-rod {
+    position: absolute;
+    top: -4px; bottom: -4px;
+    width: 22px;
+    background:
+      linear-gradient(90deg,
+        #7a5c2e 0%, #c9a876 12%, #f4e9cc 28%, #d8b888 42%,
+        #a9824a 50%,
+        #d8b888 58%, #f4e9cc 72%, #c9a876 88%, #7a5c2e 100%);
+    border-radius: 30% / 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    z-index: 3;
+  }
+  .scroll-rod::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(90deg, rgba(90,65,30,0.12) 0px, transparent 1.5px, transparent 3px);
+    border-radius: inherit;
+  }
+  .scroll-rod.left { left: -10px; }
+  .scroll-rod.right { right: -10px; }
+
   .concept-modal-inner {
-    background: #f4e9cc;
-    border: 2px solid #8b3a1e;
-    border-radius: 8px;
-    padding: 24px 20px;
-    max-width: 340px;
+    background:
+      linear-gradient(90deg, rgba(139,111,60,0.4) 0%, transparent 8%, transparent 92%, rgba(139,111,60,0.4) 100%),
+      #f4e9cc;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.35), inset 0 0 20px rgba(139,111,60,0.15);
+    padding: 32px 22px;
     width: 100%;
     position: relative;
-    transform-origin: top center;
-    animation: unrollScroll 0.55s cubic-bezier(.2,.9,.3,1.1);
+    overflow: hidden;
+    transform-origin: center;
+    animation: scrollUnroll 0.9s cubic-bezier(.25,.75,.35,1);
+    clip-path: polygon(
+      0% 4%, 4% 1%, 8% 3%, 12% 0%, 16% 3%, 20% 1%, 24% 4%, 28% 1%, 32% 3%, 36% 0%, 40% 3%, 44% 1%, 48% 4%,
+      52% 1%, 56% 3%, 60% 0%, 64% 3%, 68% 1%, 72% 4%, 76% 1%, 80% 3%, 84% 0%, 88% 3%, 92% 1%, 96% 4%, 100% 1%,
+      100% 96%, 96% 99%, 92% 97%, 88% 100%, 84% 97%, 80% 99%, 76% 96%, 72% 99%, 68% 97%, 64% 100%, 60% 97%, 56% 99%, 52% 96%,
+      48% 99%, 44% 97%, 40% 100%, 36% 97%, 32% 99%, 28% 96%, 24% 99%, 20% 97%, 16% 100%, 12% 97%, 8% 99%, 4% 96%, 0% 99%
+    );
   }
-  @keyframes unrollScroll {
-    0% { transform: scaleY(0.05) scaleX(0.6) rotate(-6deg); opacity: 0.3; }
-    55% { transform: scaleY(1.05) scaleX(1.02) rotate(1deg); opacity: 1; }
-    100% { transform: scaleY(1) scaleX(1) rotate(0deg); opacity: 1; }
+  @keyframes scrollUnroll {
+    0% { transform: scaleX(0.04); }
+    100% { transform: scaleX(1); }
   }
   .concept-modal-inner .scroll-content {
-    animation: fadeInText 0.4s ease-out 0.35s both;
+    animation: fadeInText 0.5s ease-out 0.55s both;
+    min-height: 260px;
+    display: flex;
+    flex-direction: column;
   }
   @keyframes fadeInText {
     from { opacity: 0; }
@@ -417,11 +484,12 @@
   }
   .concept-modal-close {
     position: absolute;
-    top: 10px; right: 12px;
+    top: 8px; right: 14px;
     font-size: 18px;
     color: #6b1e1e;
     background: none;
     border: none;
+    z-index: 4;
   }
   .concept-modal-title {
     font-family: "Pirata One", serif;
@@ -443,6 +511,74 @@
   }
   .concept-modal li:last-child { border-bottom: none; }
   .concept-modal .k { font-weight: 700; color: #8b3a1e; }
+
+  .scroll-page {
+    display: none;
+    flex: 1;
+    flex-direction: column;
+  }
+  .scroll-page.active { display: flex; }
+
+  .kanpai-count-title {
+    text-align: center;
+    margin-bottom: 4px;
+  }
+  .kanpai-count-title .num {
+    font-family: "Pirata One", serif;
+    font-size: 44px;
+    color: #6b1e1e;
+    line-height: 1;
+  }
+  .kanpai-count-title .unit {
+    font-size: 13px;
+    color: #7a5c2e;
+    margin-top: 2px;
+  }
+  .kanpai-mini-list {
+    list-style: none;
+    margin-top: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .kanpai-mini-list li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11.5px;
+    color: #4a3418;
+  }
+  .kanpai-mini-list .mi { font-size: 15px; width: 20px; text-align: center; }
+
+  .scroll-dots {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 16px;
+  }
+  .scroll-dots span {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: rgba(139,58,30,0.25);
+  }
+  .scroll-dots span.active { background: #8b3a1e; }
+
+  .scroll-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(139,58,30,0.12);
+    border: 1.5px solid rgba(139,58,30,0.4);
+    color: #6b1e1e;
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    font-size: 15px;
+    z-index: 4;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .scroll-nav.prev { left: 6px; }
+  .scroll-nav.next { right: 6px; }
+  .scroll-nav[disabled] { opacity: 0.25; }
 </style>
 </head>
 <body class="locked">
@@ -493,7 +629,7 @@
       <div class="sub">港のどこに錨を下ろすかは検討中</div>
     </div>
 
-    <button class="concept-btn" onclick="document.getElementById('conceptModal').classList.add('show')">
+    <button class="concept-btn" onclick="openConceptModal()">
       <svg width="40" height="64" viewBox="0 0 40 64" fill="none">
         <!-- 瓶の胴体（ガラス風） -->
         <path d="M12 22 Q10 26 10 34 L10 54 Q10 60 20 60 Q30 60 30 54 L30 34 Q30 26 28 22 Z"
@@ -515,15 +651,48 @@
 
   <!-- CONCEPT MODAL -->
   <div class="concept-modal" id="conceptModal">
-    <div class="concept-modal-inner">
-      <button class="concept-modal-close" onclick="document.getElementById('conceptModal').classList.remove('show')">✕</button>
-      <div class="scroll-content">
-        <div class="concept-modal-title">旅のコンセプト</div>
-        <ul>
-          <li><span class="k">vol.2</span><span>箱根（転職祝い）から続く、男4人旅の2回目</span></li>
-          <li><span class="k">テーマ</span><span>結婚する2人への門出祝い</span></li>
-          <li><span class="k">乾杯を軸に</span><span>移動中も、店でも、とにかく飲む</span></li>
-        </ul>
+    <div class="scroll-wrap">
+      <div class="scroll-rod left"></div>
+      <div class="scroll-rod right"></div>
+      <div class="concept-modal-inner">
+        <button class="concept-modal-close" onclick="document.getElementById('conceptModal').classList.remove('show')">✕</button>
+        <button class="scroll-nav prev" id="scrollPrev" onclick="scrollPage(-1)" disabled>‹</button>
+        <button class="scroll-nav next" id="scrollNext" onclick="scrollPage(1)">›</button>
+
+        <div class="scroll-content">
+          <div class="scroll-page active" data-page="0">
+            <div class="concept-modal-title">旅のコンセプト</div>
+            <ul>
+              <li><span class="k">vol.2</span><span>箱根（転職祝い）から続く、男4人旅の2回目</span></li>
+              <li><span class="k">テーマ</span><span>結婚する2人への門出祝い</span></li>
+              <li><span class="k">乾杯を軸に</span><span>移動中も、店でも、とにかく飲む</span></li>
+            </ul>
+          </div>
+
+          <div class="scroll-page" data-page="1">
+            <div class="concept-modal-title">乾杯予定</div>
+            <div class="kanpai-count-title">
+              <div class="num">8<span style="font-size:22px;">+1</span></div>
+              <div class="unit">今回の乾杯予定回数</div>
+            </div>
+            <ul class="kanpai-mini-list">
+              <li><span class="mi">🍺</span>新幹線・車内</li>
+              <li><span class="mi">🐂</span>上陸・牛タン</li>
+              <li><span class="mi">🦪</span>食べ歩き前編</li>
+              <li><span class="mi">⚓</span>船で一息</li>
+              <li><span class="mi">🚶</span>食べ歩き後編</li>
+              <li><span class="mi">🍶</span>国分町・本番</li>
+              <li><span class="mi">🍺</span>醸造所襲撃</li>
+              <li><span class="mi">🍻</span>港での最後の乾杯</li>
+              <li><span class="mi">🥂</span>しめ・帰りの船上</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="scroll-dots" id="scrollDots">
+          <span class="active"></span>
+          <span></span>
+        </div>
       </div>
     </div>
   </div>
@@ -676,6 +845,43 @@
 </div>
 
 <script>
+var currentScrollPage = 0;
+var totalScrollPages = 2;
+
+function openConceptModal() {
+  var modal = document.getElementById('conceptModal');
+  var inner = modal.querySelector('.concept-modal-inner');
+  var content = modal.querySelector('.scroll-content');
+  currentScrollPage = 0;
+  updateScrollPage();
+  // アニメーションを強制的に再生させるためリセット
+  inner.style.animation = 'none';
+  content.style.animation = 'none';
+  modal.classList.add('show');
+  // reflowを強制してから再度アニメーションを適用
+  void inner.offsetWidth;
+  inner.style.animation = '';
+  content.style.animation = '';
+}
+
+function scrollPage(dir) {
+  var next = currentScrollPage + dir;
+  if (next < 0 || next >= totalScrollPages) return;
+  currentScrollPage = next;
+  updateScrollPage();
+}
+
+function updateScrollPage() {
+  document.querySelectorAll('.scroll-page').forEach(function(el){
+    el.classList.toggle('active', parseInt(el.dataset.page) === currentScrollPage);
+  });
+  document.querySelectorAll('#scrollDots span').forEach(function(el, i){
+    el.classList.toggle('active', i === currentScrollPage);
+  });
+  document.getElementById('scrollPrev').disabled = (currentScrollPage === 0);
+  document.getElementById('scrollNext').disabled = (currentScrollPage === totalScrollPages - 1);
+}
+
 (function(){
   var wheelWrap = document.getElementById('gateWheel');
   var wheelSvg = document.getElementById('wheelSvg');
