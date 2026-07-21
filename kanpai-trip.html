@@ -770,7 +770,7 @@
   <div class="concept-modal" id="treasureModal">
     <div class="scroll-wrap">
       <div class="concept-modal-inner treasure-modal-inner">
-        <button class="concept-modal-close" onclick="document.getElementById('treasureModal').classList.remove('show')">✕</button>
+        <button class="concept-modal-close" onclick="document.getElementById('treasureModal').classList.remove('show'); document.documentElement.classList.remove('locked'); document.body.classList.remove('locked');">✕</button>
         <div class="scroll-content" style="overflow:visible;">
           <div class="scroll-page active" data-page="0" style="position:relative;">
             <div class="scorch-overlay" id="scorchOverlay"></div>
@@ -1245,6 +1245,7 @@ function initTreasureTrace() {
 
 function treasureTraceSuccess() {
   treasureTracing = false;
+  document.getElementById('mapModal').classList.remove('show');
   var modal = document.getElementById('treasureModal');
   var overlay = document.getElementById('scorchOverlay');
   overlay.classList.remove('burn');
