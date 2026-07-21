@@ -500,6 +500,43 @@
     height: 205px;
     overflow: visible;
   }
+  .treasure-modal-inner {
+    padding: 26px 22px;
+    overflow: hidden;
+  }
+  .treasure-msg {
+    font-size: 13.5px;
+    color: #5a3d1f;
+    line-height: 1.9;
+    text-align: center;
+    padding: 6px 4px;
+    text-shadow: 0 0 6px rgba(255,250,235,0.9);
+  }
+  .scorch-overlay {
+    position: absolute;
+    top: -6px; bottom: -6px; left: -6px;
+    width: 0%;
+    background: #1c130a;
+    z-index: 5;
+    pointer-events: none;
+  }
+  .scorch-overlay.burn {
+    animation: scorchReveal 2.4s cubic-bezier(.4,0,.2,1) forwards;
+  }
+  .scorch-overlay.burn::after {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0;
+    right: -14px;
+    width: 34px;
+    background: radial-gradient(circle, rgba(255,150,50,0.95) 0%, rgba(255,90,10,0.55) 45%, transparent 75%);
+    filter: blur(3px);
+  }
+  @keyframes scorchReveal {
+    0% { width: 0%; opacity: 1; }
+    92% { width: 112%; opacity: 1; }
+    100% { width: 112%; opacity: 0; }
+  }
   .treasure-map { display: none; }
   .treasure-map-big {
     display: block;
@@ -729,11 +766,31 @@
     </div>
   </div>
 
+  <!-- TREASURE (hidden message) -->
+  <div class="concept-modal" id="treasureModal">
+    <div class="scroll-wrap">
+      <div class="concept-modal-inner treasure-modal-inner">
+        <button class="concept-modal-close" onclick="document.getElementById('treasureModal').classList.remove('show')">✕</button>
+        <div class="scroll-content" style="overflow:visible;">
+          <div class="scroll-page active" data-page="0" style="position:relative;">
+            <div class="scorch-overlay" id="scorchOverlay"></div>
+            <div class="concept-modal-title">見つけたか、宝を。</div>
+            <div class="treasure-msg">
+              <p>ここに、祝う側2人からのメッセージを入れます。</p>
+              <p>結婚する2人へ、門出の言葉を。</p>
+            </div>
+            <div class="map-caption" style="margin-top:14px;">さあ、宝箱を開けろ。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- MAP -->
   <div class="concept-modal" id="mapModal">
     <div class="scroll-wrap">
       <div class="concept-modal-inner map-modal-inner">
-        <button class="concept-modal-close" onclick="document.getElementById('mapModal').classList.remove('show')">✕</button>
+        <button class="concept-modal-close" onclick="closeMapModal()">✕</button>
         <div class="scroll-content">
           <div class="scroll-page active" data-page="0">
             <div class="concept-modal-title">仙台上陸　全航路図</div>
@@ -1104,9 +1161,17 @@ function openMapModal() {
   var inner = modal.querySelector('.concept-modal-inner');
   inner.style.animation = 'none';
   modal.classList.add('show');
+  document.documentElement.classList.add('locked');
+  document.body.classList.add('locked');
   void inner.offsetWidth;
   inner.style.animation = '';
   setTimeout(initTreasureTrace, 100);
+}
+
+function closeMapModal() {
+  document.getElementById('mapModal').classList.remove('show');
+  document.documentElement.classList.remove('locked');
+  document.body.classList.remove('locked');
 }
 
 var treasureTraceIndex = 0;
@@ -1134,6 +1199,7 @@ function initTreasureTrace() {
   }
 
   function handleStart(evt) {
+    if (evt.cancelable) evt.preventDefault();
     var p = svgPointFromEvent(svg, evt);
     var target = points[0];
     var cx = parseFloat(target.getAttribute('cx'));
@@ -1149,6 +1215,7 @@ function initTreasureTrace() {
 
   function handleMove(evt) {
     if (!treasureTracing) return;
+    if (evt.cancelable) evt.preventDefault();
     if (treasureTraceIndex >= points.length) return;
     var p = svgPointFromEvent(svg, evt);
     var target = points[treasureTraceIndex];
@@ -1178,9 +1245,14 @@ function initTreasureTrace() {
 
 function treasureTraceSuccess() {
   treasureTracing = false;
-  console.log('宝の地図：発見！');
-  // ここに隠しページを開く処理を追加予定
-  alert('宝の地図をなぞりきった！（ここに隠しページが開く予定です）');
+  var modal = document.getElementById('treasureModal');
+  var overlay = document.getElementById('scorchOverlay');
+  overlay.classList.remove('burn');
+  void overlay.offsetWidth;
+  modal.classList.add('show');
+  setTimeout(function() {
+    overlay.classList.add('burn');
+  }, 300);
 }
 
 function scrollPage(dir) {
