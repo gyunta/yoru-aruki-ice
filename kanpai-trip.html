@@ -1200,7 +1200,7 @@ function initTreasureTrace() {
     var cx = parseFloat(target.getAttribute('cx'));
     var cy = parseFloat(target.getAttribute('cy'));
     var dist = Math.hypot(p.x - cx, p.y - cy);
-    if (dist <= 24) {
+    if (dist <= 34) {
       treasureTracing = true;
       treasureTraceIndex = 1;
     } else {
@@ -1217,7 +1217,7 @@ function initTreasureTrace() {
     var cx = parseFloat(target.getAttribute('cx'));
     var cy = parseFloat(target.getAttribute('cy'));
     var dist = Math.hypot(p.x - cx, p.y - cy);
-    if (dist <= 26) {
+    if (dist <= 38) {
       treasureTraceIndex++;
       if (treasureTraceIndex >= points.length) {
         treasureTraceSuccess();
