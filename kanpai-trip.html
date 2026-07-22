@@ -529,6 +529,9 @@
     height: auto;
     max-height: 100%;
     touch-action: none;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
     filter: drop-shadow(0 1px 2px rgba(90,61,31,0.3));
   }
 
@@ -831,7 +834,7 @@
               </defs>
             </svg>
             <div class="map-caption">1日目の航路。駅から上陸し、船宿で身を整え、腹ごしらえ、そして夜の祝杯へ。</div>
-            <svg viewBox="0 0 560 320" class="treasure-map-big" id="treasureMapSvg" xmlns="http://www.w3.org/2000/svg">
+            <svg viewBox="0 0 560 320" width="560" height="320" class="treasure-map-big" id="treasureMapSvg" xmlns="http://www.w3.org/2000/svg">
               <!-- 背景の海：波模様を敷き詰め -->
               <g stroke="#8fb0c9" stroke-width="0.8" fill="none" opacity="0.25">
                 <path d="M0,10 q8,4 16,0 t16,0 t16,0 t16,0 t16,0 t16,0 t16,0 t16,0 t16,0 t16,0 t16,0 t16,0 t16,0 t16,0 t16,0 t16,0 t16,0 t16,0 t16,0 t16,0 t16,0 t16,0 t16,0 t16,0 t16,0 t16,0 t16,0 t16,0"/>
@@ -1151,6 +1154,12 @@ function openMapModal() {
   document.body.classList.add('locked');
   void inner.offsetWidth;
   inner.style.animation = '';
+  var svg = document.getElementById('treasureMapSvg');
+  if (svg) {
+    svg.style.display = 'none';
+    void svg.offsetHeight;
+    svg.style.display = 'block';
+  }
   setTimeout(initTreasureTrace, 100);
 }
 
