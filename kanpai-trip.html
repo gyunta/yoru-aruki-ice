@@ -423,8 +423,8 @@
   .page { visibility: hidden; }
   .page.revealed { visibility: visible; animation: pageFadeIn 0.8s ease-out; }
   @keyframes pageFadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
   /* ===== コンセプトボタン・モーダル ===== */
   .concept-btn {
@@ -521,8 +521,8 @@
     padding: 20px 20px 16px;
   }
   .map-modal-inner .scroll-content {
-    height: 205px;
-    overflow: visible;
+    height: 250px;
+    overflow: hidden;
   }
   .treasure-modal-inner {
     padding: 26px 22px;
@@ -546,7 +546,6 @@
     opacity: 1;
     filter: blur(0);
   }
-  .treasure-map { display: none; }
   .treasure-map-big {
     display: block;
     width: 100%;
@@ -561,8 +560,8 @@
 
   .concept-modal#mapModal { padding: 10px; }
   .concept-modal#mapModal .scroll-wrap { max-width: 96vw; }
+  .concept-modal#mapModal .concept-modal-inner { aspect-ratio: 5 / 4; }
   .concept-modal#mapModal .map-modal-inner { padding: 14px 16px 14px 38px; }
-  .concept-modal#mapModal .map-modal-inner .scroll-content { height: auto; overflow: visible; }
   .concept-modal#mapModal .map-caption { display: none; }
 
   @media (orientation: landscape) {
@@ -934,58 +933,7 @@
         <button class="concept-modal-close" onclick="closeMapModal()">✕</button>
         <div class="scroll-content">
           <div class="scroll-page active" data-page="0">
-            <div class="concept-modal-title">仙台上陸　全航路図</div>
-            <svg viewBox="0 0 380 220" class="treasure-map" xmlns="http://www.w3.org/2000/svg">
-              <path d="M20,60 Q30,20 90,20 Q160,5 230,15 Q310,10 355,40 Q375,70 360,100 Q365,140 320,150 Q300,190 240,195 Q200,215 150,200 Q110,210 90,175 Q60,180 45,145 Q10,120 20,60 Z"
-                fill="#e8d9ab" stroke="#8b6f3c" stroke-width="2.5"/>
-              <path d="M60,55 Q100,35 150,45 Q210,25 270,45 Q320,45 340,75 Q345,105 300,110 Q290,140 250,150 Q220,175 175,165 Q140,180 120,150 Q90,150 80,115 Q45,95 60,55 Z"
-                fill="none" stroke="#b89b5e" stroke-width="1" stroke-dasharray="3,3" opacity="0.5"/>
-              <path d="M25,35 L45,65 L65,40" fill="none" stroke="#6b1e1e" stroke-width="1" opacity="0.35"/>
-              <path d="M335,25 L350,30" stroke="#6b1e1e" stroke-width="1" opacity="0.3"/>
-
-              <!-- ルート: 駅→西へ牛タン→ホテル→南下して寿司→北上して帰還 -->
-              <path d="M300,55 Q270,40 235,50 Q170,45 130,60"
-                fill="none" stroke="#6b1e1e" stroke-width="1.4" stroke-dasharray="4,4"/>
-              <path d="M130,60 Q125,110 155,150"
-                fill="none" stroke="#6b1e1e" stroke-width="1.4" stroke-dasharray="4,4"/>
-              <path d="M155,150 Q200,175 250,150 Q285,110 300,55"
-                fill="none" stroke="#6b1e1e" stroke-width="1.4" stroke-dasharray="4,4" marker-end="url(#arrow)"/>
-
-              <!-- 仙台駅（東側・上陸地点） -->
-              <circle cx="300" cy="55" r="5" fill="#c9a04a" stroke="#5a3d1f" stroke-width="1"/>
-              <text x="288" y="42" font-size="9" fill="#5a3d1f" font-family="serif">上陸地点</text>
-              <text x="292" y="72" font-size="7.5" fill="#7a5c2e" font-family="serif">仙台駅</text>
-
-              <!-- 牛タン（駅すぐ西・まず腹ごしらえ） -->
-              <rect x="232" y="51" width="10" height="8" fill="#c9a04a" stroke="#5a3d1f" stroke-width="0.8"/>
-              <text x="220" y="42" font-size="9" fill="#5a3d1f" font-family="serif">腹ごしらえ</text>
-              <text x="212" y="72" font-size="7.5" fill="#7a5c2e" font-family="serif">牛タン処</text>
-
-              <!-- ホテル（さらに西・身を整える） -->
-              <path d="M130,55 l5,-9 l5,9 z" fill="#c9a04a" stroke="#5a3d1f" stroke-width="0.8"/>
-              <text x="95" y="45" font-size="9" fill="#5a3d1f" font-family="serif">船宿</text>
-              <text x="105" y="75" font-size="7.5" fill="#7a5c2e" font-family="serif">ホテル</text>
-
-              <!-- 寿司（南、川を越えた先） -->
-              <circle cx="155" cy="150" r="5" fill="#c9a04a" stroke="#5a3d1f" stroke-width="1"/>
-              <text x="163" y="145" font-size="9" fill="#5a3d1f" font-family="serif">祝杯の宴</text>
-              <text x="165" y="168" font-size="7.5" fill="#7a5c2e" font-family="serif">寿司処</text>
-
-              <!-- 帰路の帆船マーク -->
-              <path d="M285,100 l5,-9 l5,9 z" fill="#8b6f3c" stroke="#5a3d1f" stroke-width="0.8" opacity="0.6"/>
-              <text x="255" y="98" font-size="8.5" fill="#7a5c2e" font-family="serif">船へ帰還</text>
-
-              <!-- 川（デフォルメ） -->
-              <path d="M60,120 Q120,110 180,125 Q240,135 320,115" fill="none" stroke="#8fb0c9" stroke-width="3" opacity="0.4" stroke-linecap="round"/>
-              <text x="55" y="132" font-size="7" fill="#5a7a8f" font-family="serif" opacity="0.7">広瀬川</text>
-
-              <defs>
-                <marker id="arrow" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
-                  <path d="M0,0 L8,4 L0,8 Z" fill="#6b1e1e"/>
-                </marker>
-              </defs>
-            </svg>
-            <div class="map-caption">1日目の航路。駅から上陸し、まず腹ごしらえ、そして船宿で身を整え、夜の祝杯へ。</div>
+            <div class="concept-modal-title" style="font-size:17px;">仙台上陸　全航路図</div>
             <svg viewBox="0 0 560 320" width="560" height="320" class="treasure-map-big" id="treasureMapSvg" xmlns="http://www.w3.org/2000/svg">
               <!-- 背景の海：波模様を敷き詰め -->
               <g stroke="#8fb0c9" stroke-width="0.8" fill="none" opacity="0.25">
@@ -1053,7 +1001,7 @@
               <path d="M280,142 Q250,130 223,114" fill="none" stroke="#6b1e1e" stroke-width="1.4" stroke-dasharray="4,4"/>
               <path d="M223,114 Q205,140 200,168" fill="none" stroke="#6b1e1e" stroke-width="1.4" stroke-dasharray="4,4"/>
               <path d="M200,168 Q220,190 245,205" fill="none" stroke="#6b1e1e" stroke-width="1.4" stroke-dasharray="4,4"/>
-              <path d="M245,205 Q300,235 350,205 Q400,160 320,120 Q270,100 223,114" fill="none" stroke="#6b1e1e" stroke-width="1.4" stroke-dasharray="4,4" marker-end="url(#arrowBig)"/>
+              <path d="M245,205 Q225,160 223,114" fill="none" stroke="#6b1e1e" stroke-width="1.4" stroke-dasharray="4,4" marker-end="url(#arrowBig)"/>
 
               <!-- ===== Day2ルート ===== -->
               <path d="M500,32 Q460,50 445,80" fill="none" stroke="#3d5a6b" stroke-width="1.3" stroke-dasharray="2,4" marker-end="url(#arrowBigBlue)"/>
@@ -1378,6 +1326,7 @@ function closeWantedModal() {
 }
 
 function openConceptModal() {
+  window.scrollTo(0, 0);
   var modal = document.getElementById('conceptModal');
   var inner = modal.querySelector('.concept-modal-inner');
   var content = modal.querySelector('.scroll-content');
@@ -1394,6 +1343,7 @@ function openConceptModal() {
 }
 
 function openMapModal() {
+  window.scrollTo(0, 0);
   var modal = document.getElementById('mapModal');
   var inner = modal.querySelector('.concept-modal-inner');
   inner.style.animation = 'none';
