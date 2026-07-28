@@ -524,6 +524,9 @@
     height: 250px;
     overflow: hidden;
   }
+  .map-modal-inner .scroll-page.active {
+    justify-content: center;
+  }
   .treasure-modal-inner {
     padding: 26px 22px;
     overflow: hidden;
@@ -908,7 +911,7 @@
   <div class="concept-modal" id="treasureModal">
     <div class="scroll-wrap">
       <div class="concept-modal-inner treasure-modal-inner">
-        <button class="concept-modal-close" onclick="document.getElementById('treasureModal').classList.remove('show'); document.documentElement.classList.remove('locked'); document.body.classList.remove('locked');">✕</button>
+        <button class="concept-modal-close" onclick="document.getElementById('treasureModal').classList.remove('show'); unlockScrollPosition();">✕</button>
         <div class="scroll-content" style="overflow:visible;">
           <div class="scroll-page active" data-page="0" style="position:relative;">
             <div class="treasure-reveal" id="treasureReveal">
@@ -1305,6 +1308,24 @@
 var currentScrollPage = 0;
 var totalScrollPages = 2;
 
+function lockScrollPosition() {
+  if (document.body.classList.contains('locked')) return;
+  var scrollY = window.scrollY || window.pageYOffset || 0;
+  document.body.dataset.scrollY = scrollY;
+  document.body.style.top = (-scrollY) + 'px';
+  document.documentElement.classList.add('locked');
+  document.body.classList.add('locked');
+}
+
+function unlockScrollPosition() {
+  if (!document.body.classList.contains('locked')) return;
+  var scrollY = parseInt(document.body.dataset.scrollY || '0', 10);
+  document.documentElement.classList.remove('locked');
+  document.body.classList.remove('locked');
+  document.body.style.top = '';
+  window.scrollTo(0, scrollY);
+}
+
 function openWantedBoardModal() {
   document.getElementById('wantedBoardModal').classList.add('show');
 }
@@ -1343,13 +1364,11 @@ function openConceptModal() {
 }
 
 function openMapModal() {
-  window.scrollTo(0, 0);
+  lockScrollPosition();
   var modal = document.getElementById('mapModal');
   var inner = modal.querySelector('.concept-modal-inner');
   inner.style.animation = 'none';
   modal.classList.add('show');
-  document.documentElement.classList.add('locked');
-  document.body.classList.add('locked');
   void inner.offsetWidth;
   inner.style.animation = '';
 
@@ -1370,8 +1389,7 @@ function openMapModal() {
 
 function closeMapModal() {
   document.getElementById('mapModal').classList.remove('show');
-  document.documentElement.classList.remove('locked');
-  document.body.classList.remove('locked');
+  unlockScrollPosition();
 }
 
 var treasureTraceIndex = 0;
