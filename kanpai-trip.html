@@ -1367,12 +1367,24 @@ function openMapModal() {
   lockScrollPosition();
   var modal = document.getElementById('mapModal');
   var inner = modal.querySelector('.concept-modal-inner');
+  var wrap = modal.querySelector('.scroll-wrap');
   inner.style.animation = 'none';
   modal.classList.add('show');
   void inner.offsetWidth;
   inner.style.animation = '';
 
   var svg = document.getElementById('treasureMapSvg');
+
+  function fixSvgHeight() {
+    if (!svg) return;
+    // WebKit(Safari)はflexコンテナ内でSVGのheight:autoを
+    // 正しく計算できないことがあるため、実測幅から高さを明示的に指定する
+    var svgWidth = svg.parentElement.getBoundingClientRect().width;
+    if (svgWidth > 0) {
+      svg.style.height = (svgWidth * 320 / 560) + 'px';
+    }
+  }
+
   // iOS Safariで複雑なSVGが非表示→表示直後に描画されないことがあるため、
   // モーダルの表示が実際にペイントされた後（2フレーム後）に強制再描画する
   requestAnimationFrame(function() {
@@ -1383,6 +1395,19 @@ function openMapModal() {
         svg.style.display = 'block';
       }
       initTreasureTrace();
+
+      // scroll-wrapの開くアニメーション(scrollUnroll, 0.9s)が終わってから
+      // 高さを確定する。アニメーション未検知時は少し長めのタイマーで保険をかける
+      var done = false;
+      function onAnimEnd(e) {
+        if (e && e.target !== wrap) return;
+        if (done) return;
+        done = true;
+        if (wrap) wrap.removeEventListener('animationend', onAnimEnd);
+        fixSvgHeight();
+      }
+      if (wrap) wrap.addEventListener('animationend', onAnimEnd);
+      setTimeout(onAnimEnd, 1000);
     });
   });
 }
